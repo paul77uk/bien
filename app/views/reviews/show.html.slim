@@ -1,0 +1,11 @@
+h1.text-5xl.font-extrabold.my-8.text-orange  = @review.title
+
+div 
+  = @review.score 
+  | /10
+
+div = simple_format @review.body
+
+div.flex.gap-2
+  .btn-primary = link_to 'Edit this review', edit_review_path(@review)
+  .btn-primary = button_to 'Delete this review', review_path(@review), method: :delete, onclick: "return confirm('Are you sure??')"

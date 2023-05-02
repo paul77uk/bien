@@ -1,0 +1,7 @@
+/ p 
+/   | The random number is 
+/   = @number
+
+
+- @reviews.each do |review|
+  li.underline.text-purple-900 = link_to review.title, review_path(review)

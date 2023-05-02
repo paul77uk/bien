@@ -1,0 +1,15 @@
+= form_for @review do |f|
+  p.m-4
+    = f.label :title
+    = f.text_field :title
+
+  p.m-4
+    = f.label :body
+    = f.text_area :body
+
+  p.m-4
+    = f.label :score
+    = f.number_field :score
+
+  .btn-primary = f.submit 'Save review'
+  

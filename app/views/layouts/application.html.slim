@@ -1,0 +1,27 @@
+doctype html
+html.m-2
+  head
+    title Bien
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload"
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+  body
+
+    header 
+    
+      h1.text-5xl.font-extrabold.my-8.underline.text-purple-900
+        = link_to root_path do
+          = image_tag  "bien-logo.svg" 
+
+      h2.text-4xl.font-extrabold.my-8 The best restaurant in the world
+
+      nav.my-8.text-blue-500.underline.text-purple-900
+        = link_to 'Add a review', new_review_path
+
+    main
+      = yield
+
+    footer.mt-8 Copyright 2023 Bien Reviews
