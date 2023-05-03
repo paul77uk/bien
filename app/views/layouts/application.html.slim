@@ -1,7 +1,9 @@
 doctype html
 html
   head
-    title Bien
+    title
+      = content_for :page_title 
+      | Bien Reviews - the best restaurants in the world
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
@@ -11,13 +13,11 @@ html
   body
 
     header
-      nav.bg-orange-200.p-4.drop-shadow-lg
+      nav.bg-orange-200.p-6.drop-shadow-xl
     
         h1.flex.justify-center.text-5xl.font-extrabold
           = link_to root_path do
             = image_tag  "bien-logo.svg" 
-
-        h2.flex.justify-center.text-4xl.font-extrabold.mt-8.text-gray-800.italic The best restaurant in the world
 
     div.bg-shish.bg-center.h-screen.bg-cover.p-4
 

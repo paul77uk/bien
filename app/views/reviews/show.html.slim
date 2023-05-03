@@ -1,9 +1,17 @@
+= content_for :page_title, @review.title + ' - '
+
 div.w-fit.border-solid.border-2.rounded-md.border-black-500.p-4.shadow-md.bg-orange-50
-  h1.font-semibold.mb-2.text-lg = @review.title 
+  h1.font-bold.mb-2.text-xl = @review.title 
+  h1.font-semibold.mb-2.text-lg = @review.restaurant 
 
   div.font-semibold.mb-2 
     = @review.score 
     | /10
+
+  - if @review.ambiance.present?
+    div.font-semibold.mb-2
+      | Ambiance: 
+      = @review.ambiance 
 
   div.italic
     | "
