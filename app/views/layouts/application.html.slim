@@ -1,5 +1,5 @@
 doctype html
-html.m-2
+html
   head
     title Bien
     meta name="viewport" content="width=device-width,initial-scale=1"
@@ -10,18 +10,18 @@ html.m-2
     = javascript_importmap_tags
   body
 
-    header 
+    header
+      nav.bg-orange-200.p-4.drop-shadow-lg
     
-      h1.text-5xl.font-extrabold.my-8.underline.text-purple-900
-        = link_to root_path do
-          = image_tag  "bien-logo.svg" 
+        h1.flex.justify-center.text-5xl.font-extrabold
+          = link_to root_path do
+            = image_tag  "bien-logo.svg" 
 
-      h2.text-4xl.font-extrabold.my-8 The best restaurant in the world
+        h2.flex.justify-center.text-4xl.font-extrabold.mt-8.text-gray-800.italic The best restaurant in the world
 
-      nav.my-8.text-blue-500.underline.text-purple-900
-        = link_to 'Add a review', new_review_path
+    div.bg-shish.bg-center.h-screen.bg-cover.p-4
 
-    main
+    main.bg-orange-100.p-4
       = yield
 
-    footer.mt-8 Copyright 2023 Bien Reviews
+    footer.bg-gray-900.flex.justify-center.text-gray-300.p-4.font-semibold Copyright 2023 Bien Reviews

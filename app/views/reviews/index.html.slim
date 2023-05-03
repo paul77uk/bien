@@ -2,6 +2,11 @@
 /   | The random number is 
 /   = @number
 
+h1.flex.justify-center.pt-3.text-xl.font-bold Recent Reviews
 
-- @reviews.each do |review|
-  li.underline.text-purple-900 = link_to review.title, review_path(review)
+ul.p-4.font-semibold.italic 
+  - @reviews.each do |review|
+    li = link_to review.title, review_path(review)
+
+= link_to new_review_path do
+  div.m-2.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Add review

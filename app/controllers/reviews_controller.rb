@@ -16,7 +16,7 @@ class ReviewsController < ApplicationController
       redirect_to root_path
     else
       flash[:error] = 'Something went wrong'
-      render 'new'
+      render 'new', status: :unprocessable_entity
     end
   end
 
@@ -28,11 +28,10 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     if @review.destroy
       flash[:success] = 'Object was successfully deleted.'
-      redirect_to reviews_url
     else
       flash[:error] = 'Something went wrong'
-      redirect_to reviews_url
     end
+    redirect_to reviews_url
   end
 
   def edit
@@ -46,7 +45,7 @@ class ReviewsController < ApplicationController
       redirect_to @review
     else
       flash[:error] = 'Something went wrong'
-      render 'edit'
+      render 'new', status: :unprocessable_entity
     end
   end
 

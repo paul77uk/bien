@@ -2,12 +2,12 @@ require 'rails_helper'
 
 RSpec.describe 'Deleting a review', type: :system do
   scenario 'success' do
-    review = Review.create!(title: 'Review #1')
+    review = create(:review)
     visit reviews_path
-    expect(page).to have_content('Review #1')
+    expect(page).to have_content(review.title)
     visit review_path(review)
     click_on 'Delete this review'
     accept_alert
-    expect(page).not_to have_content('Review #1')
+    expect(page).not_to have_content(review.title)
   end
 end

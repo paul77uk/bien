@@ -74,6 +74,7 @@
           1,
           null,
           null,
+          1,
           null
         ]
       },
@@ -308,12 +309,12 @@
         "lines": [
           1,
           1,
-          1,
-          1,
-          1,
-          1,
-          1,
-          1,
+          4,
+          4,
+          4,
+          4,
+          4,
+          4,
           null,
           null
         ]
@@ -347,6 +348,9 @@
       "/home/paul/bien/app/models/review.rb": {
         "lines": [
           1,
+          1,
+          1,
+          1,
           null
         ]
       },
@@ -361,6 +365,20 @@
         "lines": [
           1,
           null,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
           1,
           1,
           1,
@@ -415,17 +433,17 @@
           null,
           null,
           1,
-          1,
+          2,
           null,
           null,
           1,
-          1,
-          1,
+          2,
+          2,
           1,
           1,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
           null,
           null,
@@ -437,6 +455,20 @@
           1,
           1,
           1,
+          null,
+          0,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
           1,
           null,
           0,
@@ -445,18 +477,7 @@
           null,
           null,
           1,
-          1,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          1,
-          null,
-          0,
-          0,
-          null,
+          3,
           null,
           null
         ]
@@ -468,6 +489,6 @@
         ]
       }
     },
-    "timestamp": 1683025810
+    "timestamp": 1683123351
   }
 }

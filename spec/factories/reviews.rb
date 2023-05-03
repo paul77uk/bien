@@ -1,10 +1,10 @@
 FactoryBot.define do
   factory :review do
-    title { "MyString" }
-    body { "MyText" }
+    title { 'MyString' }
+    body { 'Body text greater than 10' }
     score { 1 }
-    restaurant { "MyString" }
+    restaurant { 'MyString' }
     price { 1 }
-    cuisine { "MyString" }
+    cuisine { 'MyString' }
   end
 end
