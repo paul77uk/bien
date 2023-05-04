@@ -50,6 +50,8 @@ gem 'slim-rails', '~> 3.6', '>= 3.6.2'
 
 gem 'simplecov', '~> 0.22.0'
 
+gem 'geocoder', '~> 1.8', '>= 1.8.1'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 

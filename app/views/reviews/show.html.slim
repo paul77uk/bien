@@ -13,6 +13,16 @@ div.w-fit.border-solid.border-2.rounded-md.border-black-500.p-4.shadow-md.bg-ora
       | Ambiance: 
       = @review.ambiance 
 
+  - if @review.price.present?
+    div.font-semibold.mb-2
+      | Price: 
+      = @review.price 
+
+  - if @review.cuisine.present?
+    div.font-semibold.mb-2
+      | Cuisine: 
+      = @review.cuisine 
+
   div.italic
     | "
     = @review.body

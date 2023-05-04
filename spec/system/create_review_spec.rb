@@ -10,7 +10,27 @@ RSpec.describe 'Creating a review', type: :system do
     click_on 'Save review'
     visit root_path
     expect(page).to have_content('Review #1')
+    click_on 'Review #1'
+    expect(page).to have_content('Zaytoons')
+    expect(page).not_to have_content('Ambiance:')
+    expect(page).not_to have_content('Cuisine:')
+    expect(page).not_to have_content('Price:')
   end
+
+  scenario 'Ambiance, Cuisine, Price present' do
+    review = create(:review)
+    visit review_path(review)
+    expect(page).to have_content(review.title)
+    expect(page).to have_content("Ambiance: #{review.ambiance}")
+    expect(page).to have_content("Price: #{review.price}")
+    expect(page).to have_content("Cuisine: #{review.cuisine}")
+  end
+
+  # scenarion 'filter cuisine & price' do
+  #   review = create(:review)
+  #   visit review_path(review)
+  #   expect(page).to have_content(review.title)
+  # end
 
   scenario 'invalid inputs' do
     visit new_review_path
