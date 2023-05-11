@@ -1,10 +1,28 @@
 require 'rails_helper'
 
 RSpec.describe 'Creating a review', type: :system do
-  scenario 'valid inputs' do
-    visit new_review_path
+  before { @user = create(:user) }
+
+  def log_in
+    visit new_session_path
+    fill_in 'Username', with: @user.username
+    fill_in 'Password', with: @user.password
+    find('#login').click
+    expect(page).to have_content("Welcome #{@user.username}")
+  end
+
+  scenario 'valid review' do
+    log_in
+    visit new_session_path
+    fill_in 'Username', with: @user.username
+    fill_in 'Password', with: @user.password
+    find('#login').click
+    expect(page).to have_content("Welcome #{@user.username}")
+
+    click_on 'Add a Review'
     fill_in 'Title', with: 'Review #1'
     fill_in 'Restaurant', with: 'Zaytoons'
+    fill_in 'Address', with: 'London'
     fill_in 'Body', with: 'what an amazing restaurant'
     fill_in 'Score', with: '10'
     click_on 'Save review'
@@ -33,6 +51,7 @@ RSpec.describe 'Creating a review', type: :system do
   # end
 
   scenario 'invalid inputs' do
+    log_in
     visit new_review_path
     fill_in 'Title', with: ''
     fill_in 'Restaurant', with: ''
@@ -43,5 +62,6 @@ RSpec.describe 'Creating a review', type: :system do
     expect(page).to have_content('Body is too short (minimum is 10 characters)')
     expect(page).to have_content('Score must be less than or equal to 10')
     expect(page).to have_content("Restaurant can't be blank")
+    expect(page).to have_content("Address can't be blank")
   end
 end

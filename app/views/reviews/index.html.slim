@@ -5,39 +5,58 @@
 = content_for :page_title, 'Home - '
   
 nav 
-  div = link_to 'All restaurants', root_path
+  / div = active_link_to 'All restaurants', root_path, active: { price: nil, cuisine: nil, location: nil }
 
-  div = link_to '$10', root_path(price: 10, cuisine: @cuisine, location: @location)
-  div = link_to '$7', root_path(price: 7, cuisine: @cuisine, location: @location)
-  div = link_to 'Lebanese', root_path(cuisine: 'Lebanese', price: @price, location: @location)
+  / div = active_link_to '$10', root_path(price: 10, cuisine: @cuisine, location: @location), active: { price: 10 }
+  / div = active_link_to '$7', root_path(price: 7, cuisine: @cuisine, location: @location), active: { price: 7 }
+  / div = active_link_to 'Lebanese', root_path(cuisine: 'Lebanese', price: @price, location: @location), active: { cuisine: 'Lebanese' }
 
-  form[action="/"]
-    | <input type="text" name="location" placeholder="Search location..." value="
-    = @location
-    | "> 
-    | <input type="hidden" name="price" value="
-    = @price
-    | "> 
-    | <input type="hidden" name="cuisine" value="
-    = @cuisine
-    | "> 
+  / form[action="/"]
+  /   | <input type="text" name="location" placeholder="Search location..." value="
+  /   = @location
+  /   | "> 
+  /   | <input type="hidden" name="price" value="
+  /   = @price
+  /   | "> 
+  /   | <input type="hidden" name="cuisine" value="
+  /   = @cuisine
+  /   | "> 
+  /   input[name="commit" type="submit" value="Search" data-disable-with="Search"]
 
-  form[action="/"]
-    | <input type="text" name="cuisine" placeholder="Search cuisine..." value="
-    = @cuisine
-    | "> 
-    | <input type="hidden" name="location" value="
-    = @location
-    | "> 
-    | <input type="hidden" name="price" value="
-    = @price
-    | ">   
+  / form[action="/"]
+  /   | <input type="text" name="cuisine" placeholder="Search cuisine..." value="
+  /   = @cuisine
+  /   | "> 
+  /   | <input type="hidden" name="location" value="
+  /   = @location
+  /   | "> 
+  /   | <input type="hidden" name="price" value="
+  /   = @price
+  /   | ">   
 
-h1.flex.justify-center.pt-3.text-xl.font-bold Recent Reviews
+  
+  form.flex[action="/"]
+    <div class="bg-white w-fit border border-gray-400 shadow">
+      <input type="text" name="location" placeholder="Location..." class="border-none w-28 focus:outline-none focus:ring-none border-0 border-b-[0.2px] border-opacity-10 focus:ring-0 focus:border-b-ownBlack focus:border-opacity-10" value="
+      = @location
+      | "> 
+      <input type="text" name="cuisine" placeholder="Cuisine..." class="border-none w-28 focus:outline-none focus:ring-none border-0 border-b-[0.2px] border-opacity-10 focus:ring-0 focus:border-b-ownBlack focus:border-opacity-10" value="
+      = @cuisine
+      | "> 
+      <input type="text" name="price" placeholder="Price..." class="border-none w-28 focus:outline-none focus:ring-none border-0 border-b-[0.2px] border-opacity-10 focus:ring-0 focus:border-b-ownBlack focus:border-opacity-10" value="
+      = @price
+      | "> 
+      | </div> 
+      input.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow[name="commit" type="submit" value="Search" data-disable-with="submit"]  
 
-ul.p-4.font-semibold.italic 
+h1.flex.pt-3.text-xl.font-bold Recent Reviews
+
+ul.py-4.font-semibold.italic
   - @reviews.each do |review|
-    li = link_to review.title, review_path(review)
+    li = link_to review_path(review) do 
+      div.text-xl = review.title
+      div.mb-3 
+        = review.cuisine
+        |  - 
+        = pluralize review.comments.count, 'comment'
 
-= link_to new_review_path do
-  div.m-2.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Add review

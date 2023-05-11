@@ -2,11 +2,31 @@
 
 div.w-fit.border-solid.border-2.rounded-md.border-black-500.p-4.shadow-md.bg-orange-50
   h1.font-bold.mb-2.text-xl = @review.title 
-  h1.font-semibold.mb-2.text-lg = @review.restaurant 
+  h1.font-semibold.mb-2.text-lg = @review.restaurant
+  
+  - if @review.bookmarks.where(user: @current_user).any?
+    = button_to review_bookmark_path(@review), method: :delete do
+      .my-4.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Unbookmark
+  - else
+    = button_to review_bookmark_path(@review) do
+        .my-4.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Bookmark
+ 
+  h3 Bookmarked by... 
+
+  ul
+    - @review.bookmarks.each do |bookmark|
+      li = bookmark.user.username
 
   div.font-semibold.mb-2 
     = @review.score 
     | /10
+
+  div
+    | Posted by 
+    - if @review.user.present?
+      = link_to @review.user.username, user_path(@review.user)
+    - else
+      | anonymous
 
   - if @review.ambiance.present?
     div.font-semibold.mb-2
@@ -27,9 +47,42 @@ div.w-fit.border-solid.border-2.rounded-md.border-black-500.p-4.shadow-md.bg-ora
     | "
     = @review.body
     | "
+  
+  - if @review.user == @current_user
+    div.flex.gap-2.
+      = link_to edit_review_path(@review) do
+        .mt-4.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Edit this review
+      = button_to review_path(@review), method: :delete, onclick: "return confirm('Are you sure??')" do
+        .mt-4.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Delete this review
 
-  div.flex.gap-2.
-    = link_to edit_review_path(@review) do
-      .mt-4.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Edit this review
-    = button_to review_path(@review), method: :delete, onclick: "return confirm('Are you sure??')" do
-      .mt-4.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Delete this review 
+h3.font-bold.text-lg.mt-6 Comments
+
+- @review.comments.order("created_at desc").each do |comment|
+  div.py-2 = simple_format comment.body
+
+  p 
+    | Posted by 
+    - if comment.user.present?
+      = link_to comment.user.username, user_path(comment.user)
+    - else 
+      | anonymous
+  p 
+    | Posted  
+    = time_ago_in_words comment.created_at
+    |  ago
+    hr.h-px.my-6.bg-gray-300.border-0
+
+h3.font-bold.text-lg Add a comment
+
+= form_for [@review, Comment.new] do |f|
+  p.m-4
+    div.font-semibold.mb-1 = f.label :body
+    = f.text_area :body
+
+  div
+    = button_to do
+      div.mt-4.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Add Comment
+
+/ = simple_form_for [@review, Comment.new] do |f|
+/   = f.input :body
+/   = f.button :submit, 'Add comment'

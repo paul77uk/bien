@@ -37,7 +37,7 @@ gem 'redis', '~> 4.0'
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem 'bcrypt', '~> 3.1.7'
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
@@ -48,12 +48,16 @@ gem 'bootsnap', require: false
 gem 'html2slim', '~> 0.2.0'
 gem 'slim-rails', '~> 3.6', '>= 3.6.2'
 
-gem 'simplecov', '~> 0.22.0'
-
 gem 'geocoder', '~> 1.8', '>= 1.8.1'
 
+gem 'simple_form'
+
+gem 'active_link_to'
+
+gem 'profanity_filter', '~> 0.1.1'
+
 # Use Sass to process CSS
-# gem "sassc-rails"
+# gem 'sassc-rails'
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -65,6 +69,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'simplecov', '~> 0.22.0'
   gem 'webdrivers'
 end
 

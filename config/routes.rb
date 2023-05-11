@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  # get 'reviews/index'
-  resources :reviews
+  resources :reviews do
+    resources :comments
+    resource :bookmark
+  end
+
+  resources :users
+
+  resource :session
 
   root 'reviews#index'
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  # root "articles#index"
 end

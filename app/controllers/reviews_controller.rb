@@ -1,4 +1,7 @@
 class ReviewsController < ApplicationController
+  # check is logged in
+  before_action :check_login, except: %i[index show]
+
   def index
     # @number = rand(100)
     @price = params[:price]
@@ -19,7 +22,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
+    # take info from the form and add it to the model
     @review = Review.new(form_params)
+
+    # and then associate it with a user
+    @review.user = @current_user
+
     if @review.save
       flash[:success] = 'Object successfully created'
       redirect_to root_path
@@ -35,20 +43,24 @@ class ReviewsController < ApplicationController
 
   def destroy
     @review = Review.find(params[:id])
-    if @review.destroy
-      flash[:success] = 'Object was successfully deleted.'
-    else
-      flash[:error] = 'Something went wrong'
-    end
-    redirect_to reviews_url
+
+    # destroy
+    @review.destroy if @review.user == @current_user
+
+    redirect_to root_path
   end
 
   def edit
     @review = Review.find(params[:id])
+
+    redirect_to root_path if @review.user != @current_user
   end
 
   def update
     @review = Review.find(params[:id])
+
+    redirect_to root_path if @review.user != @current_user
+
     if @review.update(form_params)
       flash[:success] = 'Object was successfully updated'
       redirect_to @review

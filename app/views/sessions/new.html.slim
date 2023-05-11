@@ -1,0 +1,14 @@
+h2.text-2xl.font-bold Log in to Bien Reviews
+
+= form_for :session , url: session_path do |f|
+  p.m-4
+    div.font-semibold = f.label :username
+    = f.text_field :username
+
+  p.m-4
+    div.font-semibold = f.label :password
+    = f.password_field :password
+
+  div
+    = button_to do
+      div#login.mt-4.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Log in

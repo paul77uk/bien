@@ -10,9 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_154357) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_11_005316) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "review_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_bookmarks_on_review_id"
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.text "body"
+    t.bigint "review_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["review_id"], name: "index_comments_on_review_id"
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.string "title"
@@ -28,6 +46,19 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_154357) do
     t.text "address"
     t.float "latitude"
     t.float "longitude"
+    t.integer "user_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "email"
+    t.string "password_digest"
+    t.string "real_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_foreign_key "bookmarks", "reviews"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "comments", "reviews"
 end

@@ -13,11 +13,24 @@ html
   body
 
     header
-      nav.bg-orange-200.p-6.drop-shadow-xl
-    
-        h1.flex.justify-center.text-5xl.font-extrabold
+      nav.bg-orange-100.p-6.drop-shadow-xl.flex.justify-between.items-center
+
+        h1.text-5xl.font-extrabold
           = link_to root_path do
             = image_tag  "bien-logo.svg" 
+
+        div.flex.gap-3.items-center
+          - if logged_in?
+            h2.text-2xl.font-semibold
+             | Welcome 
+             = @current_user.username
+            = link_to new_review_path do
+              div.ml-2.my-2.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Add a Review
+            = link_to session_path, data: { turbo_method: "delete" } do
+              div.my-2.w-fit.bg-orange-200.hover:bg-orange-300.text-gray-800.font-semibold.py-2.px-4.border.border-gray-400.rounded.shadow Log out
+          - else
+            = link_to 'Sign up', new_user_path
+            = link_to 'Log in', new_session_path
 
     div.bg-shish.bg-center.h-screen.bg-cover.p-4
 
